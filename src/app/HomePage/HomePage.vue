@@ -39,9 +39,9 @@ onReady(async ({ renderer, camera }) => {
   scene.add(cardMesh);
 
   controls.attach(cardMesh);
-  controls.setMode( 'rotate' );
+  controls.setMode('rotate');
   const gizmo = controls.getHelper();
-  scene.add( gizmo );
+  scene.add(gizmo);
 
   /// Animate.
 

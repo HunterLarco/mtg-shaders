@@ -20,7 +20,8 @@ export const createFoilMaterial = (
     glslVersion: THREE.GLSL3,
     uniforms: THREE.UniformsUtils.merge([
       THREE.UniformsLib.lights,
-      { card: { value: options.card } }]),
+      { card: { value: options.card } },
+    ]),
     vertexShader: VERTEX_SHADER,
     fragmentShader: FRAGMENT_SHADER,
     lights: true,

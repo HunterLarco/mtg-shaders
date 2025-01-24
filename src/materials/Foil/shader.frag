@@ -15,10 +15,9 @@ struct PointLight {
 
 uniform PointLight pointLights[ NUM_POINT_LIGHTS ];
 
-#define M_PI 3.1415926535897932384626433832795
-#define M_PI_2 (M_PI * 0.5)
+#include <common>
 
-const vec2 visibleRange = vec2(M_PI_2 * 0., M_PI_2 * 1.);
+const vec2 visibleRange = vec2(PI_HALF * 0.25, PI_HALF * 0.30);
 
 float inverseLerp(in float lower, in float upper, in float value) {
   return clamp((value - lower) / (upper - lower), 0., 1.);
@@ -38,5 +37,6 @@ void main() {
 
   // Translate the output color from linear color space to color space of
   // the THREE RenderTarget.
-  gFragColor = linearToOutputTexel(vec4(color, alpha));
+  gFragColor = vec4(mix(texture(card, vUv).rgb, color, alpha), 1);
+  gFragColor = linearToOutputTexel(gFragColor);
 }
