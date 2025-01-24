@@ -35,7 +35,7 @@ onReady(async ({ renderer, camera }) => {
     new THREE.PlaneGeometry(2.5, 3.5),
     new THREE.MeshPhysicalMaterial({
       map: texture,
-      transmission: 1,
+      transmission: 0.95,
       reflectivity: 0.6,
       iridescence: 1,
       iridescenceIOR: 1.3,
@@ -48,7 +48,7 @@ onReady(async ({ renderer, camera }) => {
   scene.add(cardMesh);
 
 
-  const light = new THREE.PointLight(0xffffff, 50.0);
+  const light = new THREE.PointLight(0xffffff, 75.0);
   light.position.set(2.5, 0, 2.5);
   scene.add(light);
 
