@@ -33,3 +33,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - https://thesalus.bitbucket.io/mtg/etched/index.html
 - https://snagy.github.io/glTF-WebGL-PBR/
+- https://poke-holo.simey.me/
