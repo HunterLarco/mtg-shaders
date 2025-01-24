@@ -19,14 +19,14 @@ const foilMaterial = shallowRef(materials.foil.createFoilMaterial({}));
 
 onReady(async ({ renderer, camera }) => {
   const controls = new TransformControls(camera, renderer.domElement);
-  camera.position.z = 4;
+  camera.position.z = 1;
 
   /// Create the scene.
 
   const scene = new THREE.Scene();
 
   const light = new THREE.PointLight(0xffffff, 50.0);
-  light.position.set(0, 0, 10);
+  light.position.set(0, 0, 1.5);
   scene.add(light);
 
   const cardMesh = new THREE.Mesh(
