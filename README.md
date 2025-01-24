@@ -28,3 +28,8 @@ npm run lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Inspiration
+
+- https://thesalus.bitbucket.io/mtg/etched/index.html
+- https://snagy.github.io/glTF-WebGL-PBR/
