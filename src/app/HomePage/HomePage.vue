@@ -3,6 +3,7 @@ import { shallowRef } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as composables from '@/composables';
+import * as materials from '@/materials';
 
 /// Initialize the canvas.
 
@@ -13,7 +14,7 @@ const { onReady } = composables.useWebGLCanvas(canvas);
 const textureLoader = shallowRef<THREE.TextureLoader>(
   new THREE.TextureLoader(),
 );
-const cardMesh = shallowRef<THREE.Mesh>();
+const foilMaterial = shallowRef(materials.foil.createFoilMaterial({}));
 
 onReady(async ({ renderer, camera }) => {
   new OrbitControls(camera, renderer.domElement);
@@ -23,14 +24,14 @@ onReady(async ({ renderer, camera }) => {
 
   const scene = new THREE.Scene();
 
-  cardMesh.value = new THREE.Mesh(
+  const cardMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(2.5, 3.5),
-    new THREE.MeshBasicMaterial({ map: new THREE.Texture() }),
+    foilMaterial.value.threeMaterial,
   );
 
   updateCardTexture(textureUrl.value);
 
-  scene.add(cardMesh.value);
+  scene.add(cardMesh);
 
   /// Animate.
 
@@ -40,12 +41,7 @@ onReady(async ({ renderer, camera }) => {
 });
 
 const updateCardTexture = async (url: string): void => {
-  if (cardMesh.value == null) {
-    throw new Error('Card Mesh is undefined');
-  }
-
-  cardMesh.value.material.map = await textureLoader.value.loadAsync(url);
-  cardMesh.value.needsUpdate = true;
+  foilMaterial.value.setCard(await textureLoader.value.loadAsync(url));
 };
 
 /// Configure the dat.gui
