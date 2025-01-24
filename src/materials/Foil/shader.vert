@@ -1,4 +1,6 @@
 out vec2 vUv;
+out vec3 vNormal;
+out vec3 vPosition;
 
 void main() {
   // THREE.js includes shader code which can be imported for several common use
@@ -9,4 +11,8 @@ void main() {
   #include <project_vertex>
 
   vUv = uv;
+
+  // We compute the normal in world coordinates.
+  vNormal = normalize((modelViewMatrix * vec4(normal, 0.0)).xyz);
+  vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
 }
