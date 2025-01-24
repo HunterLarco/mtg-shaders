@@ -22,7 +22,6 @@
 *::after {
   box-sizing: border-box;
   color: inherit;
-  font: inherit;
   margin: 0;
   padding: 0;
 }
