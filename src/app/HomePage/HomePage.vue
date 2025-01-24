@@ -2,6 +2,7 @@
 import { shallowRef } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { TransformControls } from 'three/addons/controls/TransformControls.js';
 import * as composables from '@/composables';
 import * as materials from '@/materials';
 
@@ -17,21 +18,30 @@ const textureLoader = shallowRef<THREE.TextureLoader>(
 const foilMaterial = shallowRef(materials.foil.createFoilMaterial({}));
 
 onReady(async ({ renderer, camera }) => {
-  new OrbitControls(camera, renderer.domElement);
+  const controls = new TransformControls(camera, renderer.domElement);
   camera.position.z = 4;
 
   /// Create the scene.
 
   const scene = new THREE.Scene();
 
+  const light = new THREE.PointLight(0xffffff, 50.0);
+  light.position.set(0, 0, 10);
+  scene.add(light);
+
   const cardMesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(2.5, 3.5),
+    new THREE.PlaneGeometry(5 / 7, 1),
     foilMaterial.value.threeMaterial,
   );
 
   updateCardTexture(textureUrl.value);
 
   scene.add(cardMesh);
+
+  controls.attach(cardMesh);
+  controls.setMode( 'rotate' );
+  const gizmo = controls.getHelper();
+  scene.add( gizmo );
 
   /// Animate.
 

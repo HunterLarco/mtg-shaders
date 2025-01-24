@@ -18,11 +18,12 @@ export const createFoilMaterial = (
 ): FoilMaterial => {
   const threeMaterial = new THREE.ShaderMaterial({
     glslVersion: THREE.GLSL3,
-    uniforms: {
-      card: { value: options.card },
-    },
+    uniforms: THREE.UniformsUtils.merge([
+      THREE.UniformsLib.lights,
+      { card: { value: options.card } }]),
     vertexShader: VERTEX_SHADER,
     fragmentShader: FRAGMENT_SHADER,
+    lights: true,
   });
 
   const setCard: FoilMaterial['setCard'] = (texture) => {
